@@ -1,10 +1,8 @@
 from multiprocessing.sharedctypes import Value
 from .pages.login_page import LoginPage
-from .pages.base_page import BasePage
 import pytest
 import time
 from .lib.combinatorics import all_pairs2 as ap
-from .pages.locators import LoginPageLocators 
 
 #===========================================================
 link = 'https://app.neapro.site'
@@ -26,7 +24,7 @@ password_positive = ['', 'qwertyui', 'qawsedrfg', '123456789', '!@#$%^&*', '(@#$
 password_negative = [' ']
 #===========================================================
 
-#@pytest.mark.new
+pytest.mark.new
 class TestLoginPageIsElements():
     def test_should_be_login_url(self, browser):
         # проверка url
