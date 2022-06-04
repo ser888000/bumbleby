@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from .base_page import BasePage
 from .locators import LoginPageLocators 
 import time
@@ -35,22 +34,22 @@ class LoginPage(BasePage):
     def is_valid_email_in_login_form(self, value):
         # проверка на правильный email
         self.browser.find_element(*LoginPageLocators.LOGIN_EMAIL).send_keys(value)
-        assert self.is_not_element_present(*LoginPageLocators.LOGIN_EMAIL_EROOR), "error input value: {value} to email" 
+        assert self.is_not_element_present(*LoginPageLocators.LOGIN_EMAIL_EROOR), f"error input value: {value} to email" 
 
     def is_not_valid_email_in_login_form(self, value):
         # проверка на недействительный email
         self.browser.find_element(*LoginPageLocators.LOGIN_EMAIL).send_keys(value)
-        assert self.is_element_present(*LoginPageLocators.LOGIN_EMAIL_EROOR), "error input value: {value} to email" 
+        assert self.is_element_present(*LoginPageLocators.LOGIN_EMAIL_EROOR), f"error input value: {value} to email" 
 
     def is_valid_password_in_login_form(self, value):
         # проверка на правильный password
         self.browser.find_element(*LoginPageLocators.LOGIN_PASSWORD).send_keys(value)
-        assert self.is_not_element_present(*LoginPageLocators.LOGIN_PASSWORD_ERROR), "error input value: {value} to password" 
+        assert self.is_not_element_present(*LoginPageLocators.LOGIN_PASSWORD_ERROR), f"error input value: {value} to password" 
 
     def is_not_valid_password_in_login_form(self, value):
         # проверка на недействительный password
         self.browser.find_element(*LoginPageLocators.LOGIN_PASSWORD).send_keys(value)
-        assert self.is_element_present(*LoginPageLocators.LOGIN_PASSWORD_ERROR), "error input value: {value} to password" 
+        assert self.is_element_present(*LoginPageLocators.LOGIN_PASSWORD_ERROR), f"error input value: {value} to password" 
 
     def login_user(self, email, password):
         # Авторизация пользователя
