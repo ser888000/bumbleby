@@ -3,6 +3,8 @@ from .locators import LoginPageLocators
 import time
 
 class LoginPage(BasePage):
+    
+
     def should_be_login_url(self):
         # проверка на корректный url адрес
         assert self.is_text_in_url(LoginPageLocators.TEXT_IN_LOGIN_URL), "URL in not login" 
@@ -57,4 +59,7 @@ class LoginPage(BasePage):
         self.browser.find_element(*LoginPageLocators.LOGIN_PASSWORD).send_keys(password) 
         self.browser.find_element(*LoginPageLocators.LOGIN_SUBMIT).click() 
 
+    def check_ctlr_login_email(self, value1, value2):
+        # контроль поля ввода email на предмет копирования и вставки значения
+        self.check_ctlr_for_field(*LoginPageLocators.LOGIN_EMAIL, value1, value2)
 
