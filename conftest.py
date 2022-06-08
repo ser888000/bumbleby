@@ -1,11 +1,16 @@
 from selenium import webdriver
 import pytest
+import time
+#from .test_login_page import LogIn
+from .pages.login_page import LoginPage
+from .data import *
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default="chrome",
                      help="Choose browser: chrome or firefox")
     parser.addoption('--language', action='store', default='en',
                      help="Choose language: ec, fr, ru, .....")
+
 
 @pytest.fixture(scope="session") # выполняется перед каждой сессией
 #@pytest.fixture(scope="package") 
@@ -23,7 +28,7 @@ def browser(request):
         options.add_argument('chrome')
 #        options.add_argument("--headless") # если запускать без отображения браузера, тогда убрать строку выше options.add_argument('chrome')
         options.add_argument('--start-maximizid')
-        options.add_argument('--window-size=1800,1000')
+        options.add_argument('--window-size=800,800')
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
         browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
@@ -36,3 +41,15 @@ def browser(request):
     yield browser
     print("\n** QUIT browser **")
     browser.quit()
+
+
+
+@pytest.fixture
+def login_fixture(browser):
+    # авторизация пользователя
+    page = LoginPage(browser, '/login')  
+    print('===================LogIn()==========================')    
+    page.open()
+    page.logout_user() # выход из авторизации, если есть авторизация
+    page.login_user(*login_password_valid) # авторизация пользователя 
+    time.sleep(2)
