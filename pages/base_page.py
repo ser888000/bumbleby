@@ -116,4 +116,18 @@ class BasePage:
         value_field = elem.get_property("value")
         return value_field == value1
 
+    def set_value(self, how, what, value, timeout=5):
+        elem = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        elem.clear()
+        elem.send_keys(value)
+
+    def get_text(self, how, what, timeout=5):
+        elem = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        return elem.text
+
+    def btn_click(self, how, what, timeout=5):
+        elem = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        elem.click()
+
+
 
