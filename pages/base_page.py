@@ -42,7 +42,7 @@ class BasePage:
         # если элемент есть на странице
         try:
             self.browser.find_element(how, what)
-        except NoSuchElementException as err:
+        except NoSuchElementException:
             return False
         return True
 
@@ -77,17 +77,12 @@ class BasePage:
 
     def go_to_login_page(self):
         # Переход на страницу авторизации
-        login_link = self.browser.find_element(*locator.LOGIN_LINK)
-        login_link.click() 
-
+        self.btn_click(*locator.LOGIN_LINK)
+#        return LoginPage(self.browser)
+        
     def should_be_login_link(self):
         # прверка наличия ссылки на авторизацию
         return self.is_element_present(*locator.LOGIN_LINK)
-
-    def go_to_basket_page(self):
-        # переход в корзину
-        basket_link = self.browser.find_element(*locator.BASKET_LINK)
-        basket_link.click() 
 
     def should_be_authorized_user(self):
         # проверка, что пользователь авторизован
@@ -101,7 +96,7 @@ class BasePage:
         # выход из авторизации
         if self.is_not_element_present(*locator.USER_ICON, 1): return
         self.hover(*locator.LOGO_ICON) # указатель мыши на пост, для активации скрытых элементов
-        self.browser.find_element(*locator.LOGOUT).click() 
+        self.btn_click(*locator.LOGOUT)
 
     def check_ctlr_for_field(self, how, what, value1, value2):
         # контроль поля ввода на предмет копирования и вставки значения
@@ -118,9 +113,14 @@ class BasePage:
 
     def set_value(self, how, what, value, timeout=5):
         elem = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        elem.click()
         elem.clear()
         elem.send_keys(value)
 
+    def get_value(self, how, what, timeout=5):
+        elem = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
+        return elem.get_property("value")
+        
     def get_text(self, how, what, timeout=5):
         elem = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         return elem.text

@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    BASKET_LINK = (By.CSS_SELECTOR, "div.basket-mini a.btn")
     USER_ICON = (By.CSS_SELECTOR, ".registration__profile .avatar_icon")
     LOGO_ICON = (By.CSS_SELECTOR, ".logo_icon")
     LOGOUT = (By.CSS_SELECTOR, ".logout")
@@ -26,7 +25,7 @@ class SecurityPageLocators():
     TEXT_IN_URL = "security"
     SECURITY_FORM = (By.CSS_SELECTOR, ".form > .form-title")
     SECURITY_FORM_TEXT = 'Безопасность и вход'
-    BUTTON_CHANGE_TEL = (By.CSS_SELECTOR, ".body > div:nth-child(1) .name")
+    BUTTON_CHANGE_PHONE = (By.CSS_SELECTOR, ".body > div:nth-child(1) .name")
     BUTTON_CHANGE_PASSWORD = (By.CSS_SELECTOR, ".body > div:nth-child(2) .name")
 
     CHANGE_PASSWORD_FORM = (By.CSS_SELECTOR, ".form-title > div")
@@ -39,9 +38,20 @@ class SecurityPageLocators():
     NEW_PASSWORD_ERROR = (By.CSS_SELECTOR, "#newPassword + .error-message")
     CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#confirmPassword")
     CONFIRM_PASSWORD_ERROR = (By.CSS_SELECTOR, "#confirmPassword + .error-message")
-    BUTTON_SUBMIT = (By.CSS_SELECTOR, "[type='submit']")
+    BUTTON_SUBMIT_PASSWORD = (By.CSS_SELECTOR, "[type='submit']")
     PASSWORD_CHANGED_SUCCESSFULLY = (By.CSS_SELECTOR, ".body > .body-title")
     PASSWORD_CHANGED_SUCCESSFULLY_TEXT = 'Пароль успешно изменен!'
+    
+    CHANGE_PHONE_FORM = (By.CSS_SELECTOR, ".form-title > div")
+    CHANGE_PHONE_FORM_TEXT = 'Введите новый номер'
+    CHANGE_PHONE_FORM_BTN_CLOSE = (By.CSS_SELECTOR, "[alt='X']")
+
+    PHONE = (By.CSS_SELECTOR, "[name='phone']")
+    PHONE_ERROR = (By.CSS_SELECTOR, ".error-message")
+    BUTTON_SUBMIT_PHONE = (By.CSS_SELECTOR, "[type='submit']")
+    BUTTON_SUBMIT_PHONE_DISABLED = (By.CSS_SELECTOR, "[disabled='disabled']")
+    PHONE_CHANGED_SUCCESSFULLY = (By.CSS_SELECTOR, ".body > .body-title")
+    PHONE_CHANGED_SUCCESSFULLY_TEXT = 'Номер телефона успешно изменен!'
     
     
 

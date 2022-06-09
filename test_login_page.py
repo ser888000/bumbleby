@@ -27,7 +27,7 @@ class TestLoginPageCheckElements():
         # ==== steps ====
         assert page.should_be_field_email(), "field email is not presented"  
 
-    @pytest.mark.parametrize('data', email_valid) 
+    @pytest.mark.parametrize('data', emails_valid) 
     def test_check_field_email_positive(self, browser, data):
         page = LoginPage(browser, url)      
         page.open()
@@ -35,7 +35,7 @@ class TestLoginPageCheckElements():
         assert page.is_valid_email_in_login_form(data), f"ERROR input value: {data} to email" 
 
     @pytest.mark.negative
-    @pytest.mark.parametrize('data', email_invalid) 
+    @pytest.mark.parametrize('data', emails_invalid) 
     def test_check_field_email_invalid(self, browser, data):
         page = LoginPage(browser, url)      
         page.open()
@@ -54,17 +54,15 @@ class TestLoginPageCheckElements():
         # ==== steps ====
         assert page.should_be_field_password(), "field password is not presented" 
 
-    @pytest.mark.new
-    @pytest.mark.parametrize('data', password_valid) 
+    @pytest.mark.parametrize('data', passwords_valid) 
     def test_check_field_password_positive(self, browser, data):
         page = LoginPage(browser, url)      
         page.open()
         # ==== steps ====
         assert page.is_valid_password_in_login_form(data), f"ERROR input value: {data} to password" 
 
-    @pytest.mark.new
     @pytest.mark.negative
-    @pytest.mark.parametrize('data', password_invalid) 
+    @pytest.mark.parametrize('data', passwords_invalid) 
     def test_check_field_password_invalid(self, browser, data):
         page = LoginPage(browser, url)      
         page.open()
