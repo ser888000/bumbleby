@@ -4,6 +4,8 @@ import time
 #from .test_login_page import LogIn
 from .pages.login_page import LoginPage
 from .data import *
+#import uuid
+#import allure
 
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store', default="chrome",
@@ -28,7 +30,7 @@ def browser(request):
         options.add_argument('chrome')
 #        options.add_argument("--headless") # если запускать без отображения браузера, тогда убрать строку выше options.add_argument('chrome')
         options.add_argument('--start-maximizid')
-        options.add_argument('--window-size=800,800')
+        options.add_argument('--window-size=1080,1080')
         options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
         browser = webdriver.Chrome(options=options)
     elif browser_name == "firefox":
