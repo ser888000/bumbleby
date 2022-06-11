@@ -11,7 +11,7 @@ url = '/cabinet/security'
 def test_empty(login_fixture): # не знаю пока как написать логин, фикстура находится в conftest.py
     pass
 
-@pytest.mark.new
+#@pytest.mark.new
 class TestSecurityPageCheckElements():
     
     #-----------security_form-------------------------------------------------------
@@ -237,7 +237,7 @@ class TestSecurityPageCheckElements():
 
     #------------------is_valid------------------------------------------------
 
-    
+    @pytest.mark.new
     @pytest.mark.parametrize('data', phones_valid) 
     def test_check_is_valid_phone_in_change_phone_form(self, browser, data):
         # проверка phone на допустимые значения

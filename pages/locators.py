@@ -10,7 +10,7 @@ class BasePageLocators():
 class LoginPageLocators():
     TEXT_IN_LOGIN_URL = "login"
     
-    LOGIN_FORM = (By.CSS_SELECTOR, ".login-form")
+    LOGIN_FORM = (By.CSS_SELECTOR, ".body .login-form")
     LOGIN_EMAIL = (By.CSS_SELECTOR, ".field [type='text']")
     LOGIN_PASSWORD = (By.CSS_SELECTOR, ".field [type='password']")
     LOGIN_EMAIL_EROOR = (By.CSS_SELECTOR, ".field [type='text'][class='has-error']")
