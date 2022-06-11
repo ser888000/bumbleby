@@ -1,101 +1,91 @@
-from multiprocessing.sharedctypes import Value
 from .pages.login_page import LoginPage
 import pytest
 import time
-from .lib.combinatorics import all_pairs2 as ap
+from .data import *
 
 #===========================================================
 url = '/login'
-email = 'cto8@ya.ru'
-password = '12345678'
-# список недействительных данных для попарного тестирования авторизации (почта, пароль)
-email_password_negative = list(ap.all_pairs2([
-        ['fake@fakemail.ru', ''],
-        ['11111111', '']
-        ]))
-# список действительных данных для проверки поля почта
-email_positive = ['', 'fake@fakemail.ru']
-# список недействительных данных для проверки поля почта
-email_negative = [' ', 'fake', 'fake.ru', 'fake@', '0000']
-# список действительных данных для проверки поля пароль
-password_positive = ['', 'qwertyui', 'qawsedrfg', '123456789', '!@#$%^&*', '(@#$%^&*)']
-# список недействительных данных для проверки поля пароль
-password_negative = [' ']
-#===========================================================
 
-pytest.mark.new
-class TestLoginPageIsElements():
+#@pytest.mark.new
+class TestLoginPageCheckElements():
     def test_should_be_login_url(self, browser):
-        # проверка url
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_login_url() 
+        time.sleep(1)
+        # ==== steps ====
+        assert page.should_be_login_url(), "URL in not login" 
 
     def test_should_be_login_form(self, browser):
-        # проверка формы логина
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_field_form() 
+        # ==== steps ====
+        assert page.should_be_login_form(), "login form is not presented"  
 
-    @pytest.mark.parametrize('arr', email_positive) 
-    def test_check_field_email_positive(self, browser, arr):
-        # проверка email на допустимые значения
+    def test_should_be_login_email(self, browser):
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_field_email() 
-        page.is_valid_email_in_login_form(arr)
+        # ==== steps ====
+        assert page.should_be_field_email(), "field email is not presented"  
 
-    @pytest.mark.negative
-    @pytest.mark.parametrize('arr', email_negative) 
-    def test_check_field_email_negative(self, browser, arr):
-        # проверка email на допустимые значения
+    @pytest.mark.parametrize('data', emails_valid) 
+    def test_check_field_email_positive(self, browser, data):
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_field_email() 
-        page.is_not_valid_email_in_login_form(arr)
-
-    @pytest.mark.parametrize('arr', password_positive) 
-    def test_check_field_password_positive(self, browser, arr):
-        # проверка password на допустимые значения
-        page = LoginPage(browser, url)      
-        page.open()
-        page.should_be_field_password() 
-        page.is_valid_password_in_login_form(arr)
+        # ==== steps ====
+        assert page.is_valid_email_in_login_form(data), f"ERROR input value: {data} to email" 
 
     @pytest.mark.negative
-    @pytest.mark.parametrize('arr', password_negative) 
-    def test_check_field_password_negative(self, browser, arr):
-        # проверка password на допустимые значения
+    @pytest.mark.parametrize('data', emails_invalid) 
+    def test_check_field_email_invalid(self, browser, data):
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_field_password() 
-        page.is_not_valid_password_in_login_form(arr)
+        # ==== steps ====
+        assert page.is_invalid_email_in_login_form(data), f"NEGATIVE error input value: {data} to email" 
+
+    def test_ctrl_email(self, browser):
+        page = LoginPage(browser, url)      
+        page.open()
+        # ==== steps ====
+        assert page.check_ctlr_login_email('wwwwww', 'eeeeee'), "ERROR Ctrl+c and Ctrl+v"
+
+    def test_should_be_login_password(self, browser):
+        page = LoginPage(browser, url)      
+        page.open()
+        # ==== steps ====
+        assert page.should_be_field_password(), "field password is not presented" 
+
+    @pytest.mark.parametrize('data', passwords_valid) 
+    def test_check_field_password_positive(self, browser, data):
+        page = LoginPage(browser, url)      
+        page.open()
+        # ==== steps ====
+        assert page.is_valid_password_in_login_form(data), f"ERROR input value: {data} to password" 
+
+    @pytest.mark.negative
+    @pytest.mark.parametrize('data', passwords_invalid) 
+    def test_check_field_password_invalid(self, browser, data):
+        page = LoginPage(browser, url)      
+        page.open()
+        # ==== steps ====
+        assert page.is_invalid_password_in_login_form(data), f"NEGATIVE error input value: {data} to password" 
 
     def test_should_be_button_submit(self, browser):
-        # проверка кнопки войти
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_button_submit() 
+        # ==== steps ====
+        assert page.should_be_button_submit(), "button submit is not presented"  
 
     def test_should_be_button_registration(self, browser):
-        # проверка кнопки регистрация
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_button_registration() 
+        # ==== steps ====
+        assert page.should_be_button_registration() , "button registration is not presented" 
 
     def test_should_be_button_forgot_password(self, browser):
-        # проверка кнопки забыли пароль
         page = LoginPage(browser, url)      
         page.open()
-        page.should_be_button_forgot_password() 
-
-    @pytest.mark.new
-    def test_ctrl_email(self, browser):
-        # контроль поля ввода email на предмет копирования и вставки значения
-        page = LoginPage(browser, url)      
-        page.open()
-        page.check_ctlr_login_email('wwwwww', 'eeeeee')
-#        browser.save_screenshot('55555.png') # скриншот в рабочую папку
+        # ==== steps ====
+        assert page.should_be_button_forgot_password(), "button forgot_password is not presented"  
 
 
 
@@ -104,21 +94,31 @@ class TestLoginPageLogin():
 #    @pytest.mark.new
     def test_login_user(self, browser):
         # авторизация пользователя
+        # ---- precondition ----
         page = LoginPage(browser, url)      
         page.open()
         page.logout_user() # выход из авторизации, если есть авторизация
-        page.login_user(email, password) # авторизация пользователя 
-        page.should_be_authorized_user() # проверка что пользователь авторизован
+        # ==== steps ====
+        page.login_user(*login_password_valid) # авторизация пользователя 
+        # ---- check ----
+        assert page.should_be_authorized_user(), "FAIL: User is not authorized" 
+        # ---- postcondition ----
         page.logout_user() # выход из авторизации
 
     @pytest.mark.negative
-    @pytest.mark.parametrize('arr', email_password_negative)    
-    def test_login_user_negative(self, browser, arr):
+    @pytest.mark.parametrize('data', login_password_pairs_invalid)    
+    def test_login_user_invalid(self, browser, data):
         # аторизация с негативными данными почты и пароля
+        # ---- precondition ----
         page = LoginPage(browser, url)      
         page.open()
-        page.login_user(*arr) # авторизация пользователя 
-        page.should_be_not_authorized_user() # проверка отсутствия авторизации
+        page.logout_user() # выход из авторизации, если есть авторизация
+        # ==== steps ====
+        page.login_user(*data) # авторизация пользователя 
+        assert page.should_be_not_authorized_user(), "NEGATIVE FAIL: User is authorized" 
+        # ---- postcondition ----
+        page.logout_user() # выход из авторизации
+
 
 
 

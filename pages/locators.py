@@ -2,7 +2,6 @@ from selenium.webdriver.common.by import By
 
 class BasePageLocators():
     LOGIN_LINK = (By.CSS_SELECTOR, "#login_link")
-    BASKET_LINK = (By.CSS_SELECTOR, "div.basket-mini a.btn")
     USER_ICON = (By.CSS_SELECTOR, ".registration__profile .avatar_icon")
     LOGO_ICON = (By.CSS_SELECTOR, ".logo_icon")
     LOGOUT = (By.CSS_SELECTOR, ".logout")
@@ -22,14 +21,39 @@ class LoginPageLocators():
     
 
 
-class ProductPageLocators():
-    TEXT_IN_URL = "promo"
-    BUTTON_ADD_TO_BASKET = (By.CSS_SELECTOR, ".btn-add-to-basket")
-    PRODUCT_NAME_IN_MESSAGE_ABOUT_ADDING = (By.CSS_SELECTOR, "div.alertinner strong")
-    PRODUCT_NAME = (By.CSS_SELECTOR, "div.product_main h1")
-    PRODUCT_PRICE_IN_MESSAGE_BASKET_TOTAL = (By.CSS_SELECTOR, ".alert-info .alertinner strong")
-    PRODUCT_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
-    SUCCESS_MESSAGE = (By.CSS_SELECTOR, "div.alertinner")
+class SecurityPageLocators():
+    TEXT_IN_URL = "security"
+    SECURITY_FORM = (By.CSS_SELECTOR, ".form > .form-title")
+    SECURITY_FORM_TEXT = 'Безопасность и вход'
+    BUTTON_CHANGE_PHONE = (By.CSS_SELECTOR, ".body > div:nth-child(1) .name")
+    BUTTON_CHANGE_PASSWORD = (By.CSS_SELECTOR, ".body > div:nth-child(2) .name")
+
+    CHANGE_PASSWORD_FORM = (By.CSS_SELECTOR, ".form-title > div")
+    CHANGE_PASSWORD_FORM_TEXT = 'Смена пароля'
+    CHANGE_PASSWORD_FORM_BTN_CLOSE = (By.CSS_SELECTOR, "[alt='X']")
+
+    OLD_PASSWORD = (By.CSS_SELECTOR, "#oldPassword")
+    OLD_PASSWORD_ERROR = (By.CSS_SELECTOR, "#oldPassword + .error-message")
+    NEW_PASSWORD = (By.CSS_SELECTOR, "#newPassword")
+    NEW_PASSWORD_ERROR = (By.CSS_SELECTOR, "#newPassword + .error-message")
+    CONFIRM_PASSWORD = (By.CSS_SELECTOR, "#confirmPassword")
+    CONFIRM_PASSWORD_ERROR = (By.CSS_SELECTOR, "#confirmPassword + .error-message")
+    BUTTON_SUBMIT_PASSWORD = (By.CSS_SELECTOR, "[type='submit']")
+    PASSWORD_CHANGED_SUCCESSFULLY = (By.CSS_SELECTOR, ".body > .body-title")
+    PASSWORD_CHANGED_SUCCESSFULLY_TEXT = 'Пароль успешно изменен!'
+    
+    CHANGE_PHONE_FORM = (By.CSS_SELECTOR, ".form-title > div")
+    CHANGE_PHONE_FORM_TEXT = 'Введите новый номер'
+    CHANGE_PHONE_FORM_BTN_CLOSE = (By.CSS_SELECTOR, "[alt='X']")
+
+    PHONE = (By.CSS_SELECTOR, "[name='phone']")
+    PHONE_ERROR = (By.CSS_SELECTOR, ".error-message")
+    BUTTON_SUBMIT_PHONE = (By.CSS_SELECTOR, "[type='submit']")
+    BUTTON_SUBMIT_PHONE_DISABLED = (By.CSS_SELECTOR, "[disabled='disabled']")
+    PHONE_CHANGED_SUCCESSFULLY = (By.CSS_SELECTOR, ".body > .body-title")
+    PHONE_CHANGED_SUCCESSFULLY_TEXT = 'Номер телефона успешно изменен!'
+    
+    
 
 class BasketPageLocators():
     BASKET_TOTAL = (By.CSS_SELECTOR, ".total")
