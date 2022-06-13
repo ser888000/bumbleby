@@ -53,8 +53,4 @@ class SecurityPageLocators():
     PHONE_CHANGED_SUCCESSFULLY = (By.CSS_SELECTOR, ".body > .body-title")
     PHONE_CHANGED_SUCCESSFULLY_TEXT = 'Номер телефона успешно изменен!'
     
-    
 
-class BasketPageLocators():
-    BASKET_TOTAL = (By.CSS_SELECTOR, ".total")
-    BASKET_EMPTY = (By.CSS_SELECTOR, ".content #content_inner > p")
